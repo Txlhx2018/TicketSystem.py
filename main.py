@@ -7,7 +7,7 @@ client.remove_command('help')
 
 @client.event
 async def on_ready():
-    print('Bot is online')  
+    print('Bot ist Bereit')  
 
 @client.command()
 async def new(ctx):
@@ -21,10 +21,13 @@ async def new(ctx):
         
         await ticket_channel.set_permissions(guild.default_role, send_messages=False, read_messages=False) 
    
-        embed=discord.Embed(title="Support Ticket", description=f":tickets:-{ctx.author.mention} - :lock: = ```.close <#ticket>```", color=0x00ff00)                                                                                  
-                                                   
-        await ticket_channel.send(embed=embed) 
-        
+        embed=discord.Embed(color=0xff8103)
+        embed.add_field(name="Support Ticket", value=f"Ticket by {ctx.author.mention}", inline=False)
+        embed.add_field(name="Option:", value=":lock: - ```.close - <#ticket>```", inline=False)
+        embed.set_footer(text=f"Ticket | {ctx.author}")
+        await ticket_channel.send(embed=embed)
+        await ticket_channel.send(f"Hello, {ctx.author.mention}! Please describe your problem as well as you can, that a Ticket-Helper can help you.") 
+
 @client.command()
 @commands.has_permissions(manage_channels=True)
 async def close(ctx, channel: discord.TextChannel): 
@@ -37,7 +40,7 @@ async def setup(ctx):
            
         guild = ctx.guild
         await ctx.guild.create_role(name="Ticket-Helper", colour=discord.Colour(0xE03400)) 
-        em=discord.Embed(title="Information", description="Ticket System was successfully installed. Attention If you run ```.setup``` again, the ticket system will no longer work and report an error. Since there are there 2 roles of ticket helper you have to delete one then, This code is still in development for problems/questions contact me on Discord : Talha2018#0001", color=0x00ff00)                                    
+        em=discord.Embed(title="Information", description="Ticket System was successfully installed. | Attention If you run ```.setup``` again, the ticket system will no longer work and report an error. Since there are there 2 roles of ticket helper you have to delete one then, This code is still in development for problems/questions contact me on Discord : Talha2018#0001", color=0x00ff00)                                    
         await ctx.send(embed=em) 
            
 @client.command() 
@@ -54,5 +57,5 @@ async def help(ctx):
                                                    
         await ctx.send(embed=embed) 
 	
-client.run('YOUR BOT TOKEN FROM DISCORD DEVELOPER PORTAL')
+client.run('Your BOT TOKEN')
 #©Talha2018 - For Help Contact me on Discord : Talha2018#0001
