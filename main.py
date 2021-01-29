@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import Activity, ActivityType
 from discord.utils import get
 
 client = commands.Bot(command_prefix ='.')
@@ -7,7 +8,10 @@ client.remove_command('help')
 
 @client.event
 async def on_ready():
-    print('Bot ist Bereit')  
+        await client.wait_until_ready()
+        await client.change_presence(activity=Activity(name="Playing Ticket System by Talha2018#0001",
+                                                type=ActivityType.playing))
+        print('Bot is ready')
 
 @client.command()
 async def new(ctx):
@@ -57,5 +61,5 @@ async def help(ctx):
                                                    
         await ctx.send(embed=embed) 
 	
-client.run('Your BOT TOKEN')
-#©Talha2018 - For Help Contact me on Discord : Talha2018#0001
+client.run('Your BOT TOKEN FROM DISCORD DEVELOPER PORTAL')
+#Talha2018 - For Help Contact me on Discord : Talha2018#0001
